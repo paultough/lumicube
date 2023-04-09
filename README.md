@@ -7,7 +7,9 @@ This code allows remote access to your AbstractFoundry lumicube using the docume
 ## References
 
 [Abstract Foundry Website](https://abstractfoundry.com/)
+
 [LumiCube manual](https://abstractfoundry.com/lumicube/manual.pdf)
+
 [LumiCube reference docs](https://github.com/abstractfoundry/lumicube)
 
 ## Purpose / Why?
@@ -24,7 +26,7 @@ Additional requirements for my cube were:
 
 What I learned:
 
-1. The cube daemon just execurtes commands and has no locking in place.  This means that you can have multiple actions firing from differnet programs at the same time.  This is actually a good thing.  It would be possible to execute a queuing mechanism on top of the daemon if this was a problem and maybe something I would look at if this is a problem.
+1. The cube daemon just execurtes commands and has no locking in place.  This means that you can have multiple actions firing from different programs at the same time.  This is actually a good thing.  It would be possible to execute a queuing mechanism on top of the daemon if this was a problem and maybe something I would look at if this is a problem.
 
 
 ## What's in the codebase
@@ -48,9 +50,9 @@ This file is taken directly from the lumicube open source repo with a few modifi
 
 The original AbstractFoundry code can be found here so you can compare:
 
-[Original standard_liubrary.py](https://github.com/abstractfoundry/lumicube-daemon/blob/main/src/main/resources/META-INF/resources/python/foundry_api/standard_library.py)
+[Original standard_library.py](https://github.com/abstractfoundry/lumicube-daemon/blob/main/src/main/resources/META-INF/resources/python/foundry_api/standard_library.py)
 
-The only real changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the lumicube deamon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the lumicube on your remote computer).
+The main changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the lumicube deamon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the lumicube on your remote computer).
 
 Removing this default cube creation means that in your code you *MUST* create your own cube instance using, for example:
 
@@ -74,6 +76,6 @@ Or even better:
   # my code here...
 ```
 
-For those following the examples in the cube's manual you will need to make some changes to make them work as the default cube and its aliases are not available as a result of the above changes.  See the commented out section at the end of the file if you want to replicate these or just put "cube." in front of your calls to the cube. I prefer the prefixing as I like the non-abstracting of the fact the cube API is actually a class. It was a small peev of mine from the manual as it hid something important from the coder I think.
+For those following the examples in the cube's manual you will need to make some changes to make them work as the default cube and its aliases are not available as a result of the above changes.  See the commented out section at the end of the file if you want to replicate these or just put `cube.` in front of your calls to the cube. I prefer the prefixing as I like the non-abstracting of the fact the cube API is actually a class. It was a small peev of mine from the manual as it hid something important from the coder I think.
 
 
