@@ -23,6 +23,7 @@ I wanted to access the LumiCube without the need to access the web interface on 
 Additional requirements for my cube were:
 
 1. I want to be able to trigger activities on the cube based on external events.  For example, to alert to an email at a specific email address.  You can create a script to do this BUT it would be the only script that would execute on the cube and I want to be able to potentially have many different scripts running at once and to execute these potentially remotely.
+2. I wanted to utilise any python library on the Internet for use in my code (see example lava lamp customisation below).
 
 What I learned:
 
