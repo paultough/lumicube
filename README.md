@@ -43,7 +43,7 @@ What I learned:
 
 ### lava.py
 
-The example lava lamp is one of my favourites but it relies on a "noise generation function" that is actually embedded into the LumiCube daemon.  I swapped out the use of that function which in inaccessible to a remote program (or one not running inside the daemon) to use the pure python opensimplex library.  This is only one line change in the code and not as complex as it seems.  It soes however need the use of the opensimplex python library and you will need to add the library with `pip` or `pipenv`.  *This is another reason for executing your code outside of the cube as it allows you to use any of the myriad of python libraries accessible to you on the Internet into your codebase.*
+The example lava lamp is one of my favourites but it relies on a "noise generation function" that is actually embedded into the LumiCube daemon.  I swapped out the use of that function which is inaccessible to a remote program (or one not running inside the daemon) to use the pure python opensimplex library.  This is only one line change in the code and not as complex as it seems.  It soes however need the use of the opensimplex python library and you will need to add the library with `pip` or `pipenv`.  *This is another reason for executing your code outside of the cube as it allows you to use any of the myriad of python libraries accessible to you on the Internet into your codebase.*
 
 The only reason the `Piplock` files are in the repo currently is to document the [opensimplex](https://pypi.org/project/opensimplex/) library needed for the `lava.py` script.
 
@@ -90,7 +90,7 @@ The original AbstractFoundry code can be found here so you can compare:
 
 [Original standard_library.py](https://github.com/abstractfoundry/lumicube-daemon/blob/main/src/main/resources/META-INF/resources/python/foundry_api/standard_library.py)
 
-The main changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the LumiCube deamon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the LumiCube on your remote computer).
+The main changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the LumiCube daemon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the LumiCube on your remote computer).
 
 Removing this default cube creation means that in your code you *MUST* create your own cube instance using, for example:
 
