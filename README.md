@@ -46,13 +46,13 @@ What I learned:
 
 The example lava lamp is one of my favourites but it relies on a "noise generation function" that is actually embedded into the LumiCube daemon.  I swapped out the use of that function which is inaccessible to a remote program (or one not running inside the daemon) to use the pure python opensimplex library.  This is only one line change in the code and not as complex as it seems.  It does however need the use of the `opensimplex` python library and you will need to add the library with `pip` or `pipenv`.  *This is another reason for executing your code outside of the cube as it allows you to use any of the myriad of python libraries accessible to you on the Internet into your codebase.*
 
-The only reason the `Piplock` files are in the repo currently is to document the [opensimplex](https://pypi.org/project/opensimplex/) library needed for the `lava.py` script.
+The only reason the `Piplock` files are in the repo currently is to document / install the [opensimplex](https://pypi.org/project/opensimplex/) library needed for the `lava.py` script.
 
 ## How to use
 
 1. Clone the repo.
 
-2. Setup a virtuial environment (eg Pipenv)
+2. Setup a virtual environment (eg Pipenv)
 
 ```
 pipenv install
