@@ -26,7 +26,7 @@ Additional requirements for my cube were:
 
 What I learned:
 
-1. The cube daemon just execurtes commands and has no locking in place.  This means that you can have multiple actions firing from different programs at the same time.  This is actually a good thing.  It would be possible to execute a queuing mechanism on top of the daemon if this was a problem and maybe something I would look at if this is a problem.
+1. The cube daemon just executes commands and has no locking in place.  This means that you can have multiple actions firing from different programs at the same time.  This is actually a good thing.  It would be possible to execute a queuing mechanism on top of the daemon if this was a problem and maybe something I would look at if this is a problem.
 
 
 ## What's in the codebase
