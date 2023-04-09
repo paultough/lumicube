@@ -64,7 +64,8 @@ Where "cube-hostname" is the cube's IP address or hostname.  I've set the hostna
 
 Or even better:
 
-``` cube = None
+``` 
+  cube = None
 
   if isRunningOnCube():
     # connect locally if running locally
