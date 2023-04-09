@@ -1,6 +1,6 @@
-# lumicube
+# LumiCube
 
-This code allows remote access to your AbstractFoundry lumicube using the documented API without the need to enter your code into the Web Interface.
+This code allows remote access to your AbstractFoundry LumiCube using the documented API without the need to enter your code into the Web Interface.
 
 *Thanks to the AbstractFoundry team for creating a cool and funky device that sits nicely on my desk that beats any boring LCD clock*
 
@@ -14,7 +14,7 @@ This code allows remote access to your AbstractFoundry lumicube using the docume
 
 ## Purpose / Why?
 
-I wanted to access the Lumicube without the need to access the web interface on the cube itself.  The intention of the lumicube was to provide a device that provides students with a physical cube to allow them to explore learning Python and for that purpose the web UI is perfect.  But for larger projects or for other use cases this has some drawbacks which I wanted to avoid, including:
+I wanted to access the LumiCube without the need to access the web interface on the cube itself.  The intention of the LumiCube was to provide a device that provides students with a physical cube to allow them to explore learning Python and for that purpose the web UI is perfect.  But for larger projects or for other use cases this has some drawbacks which I wanted to avoid, including:
 
 1. To access the web UI you need to go through a browser and then code in the UI and then execute.  This is great for learning and for scripting small pieces of code but not great for more complex code.  I want to be able to code in my own editor and then execurte the code on my cube at the push of a button.
 2. The web UI is designed for smaller scripts and not for multi-file Python programming.
@@ -35,30 +35,68 @@ What I learned:
 
 
 * clock.py - example supplied from AbstractFoundry that can be run from your remote computer using the modified library file
-* heart.py - example supplied from AbstractFoundry manual that can be run from your remote computer using the modified library file
-* speaker.py - example supplied from AbstractFoundry manual that can be run from your remote computer using the modified library file
+* heart.py - example supplied from AbstractFoundry that can be run from your remote computer using the modified library file
+* speaker.py - example supplied from AbstractFoundry that can be run from your remote computer using the modified library file
+* lava.py - remote lava lamp code abstracted from AbstractFoundry that used pure python as opposed to making use of an embedded library in the daemon (see below).  This is the only reason you need the Pipfile* in the repo.  If not using the lava.py script then you shouldn't need to do a pipenv install (or equivalent for your virtualenv setup).
 * lumicube/standard_library.py - this is a modified version of the standard_library.py that is used by the web UI to be able to be used remotely.  I've not tested every function but am reasobaly confident it will support all the main API calls as the cube was designed to control other cubes (which is why this works).
+* Piplock* - for use with `pipenv` when wanting to 
+
+### lava.py
+
+The example lava lamp is one of my favourites but it relies on a "noise generation function" that is actually embedded into the LumiCube daemon.  I swapped out the use of that function which in inaccessible to a remote program (or one not running inside the daemon) to use the pure python opensimplex library.  This is only one line change in the code and not as complex as it seems.  It soes however need the use of the opensimplex python library and you will need to add the library with `pip` or `pipenv`.  *This is another reason for executing your code outside of the cube as it allows you to use any of the myriad of python libraries accessible to you on the Internet into your codebase.*
+
+The only reason the `Piplock` files are in the repo currently is to document the [opensimplex](https://pypi.org/project/opensimplex/) library needed for the `lava.py` script.
 
 ## How to use
 
-Just clone the repo and make your own scripts based on the examples in the codebase making sure that the "template" code is at the top of the main python file you call.
+1. Clone the repo.
+
+2. Setup a virtuial environment (eg Pipenv)
+
+```
+pipenv install
+```
+
+3. Make any changes to the scripts to point to your cube.
+
+4. Then execute the script you wish to use, for example:
+
+```
+python clock.py
+```
+
+5. Make your own scripts based on the examples in the codebase ensuring that the "template" code is at the top of the main python file you call.
 
 
-### Some notes
+```
+from lumicube.standard_library import *
 
-This file is taken directly from the lumicube open source repo with a few modifications so that you can run commands using the lumicube python API on a remote computer.  This is what I bought my lumicube for - so that I could remotely control it based on things happening on my local computer.  I was frustrated that I needed to access the web API on the cube to code it and so this is my solution which works for my purposes and I supply here for anyone else wanting to do something similar.  *Be nice - I only dust off my Python skills about once per year!*
+cube = None
+
+if isRunningOnCube():
+    # connect locally if running locally
+    cube = LumiCube();
+else:
+    # connect to my remote cube if not running locally (eg from my Mac)
+    # PUT YOUR OWN HOSTNAME FOR YOUR CUBE HERE
+    cube = LumiCube("cube.local")
+```
+
+### Additional notes
+
+This file is taken directly from the LumiCube open source repo with a few modifications so that you can run commands using the LumiCube python API on a remote computer.  This is what I bought my LumiCube for - so that I could remotely control it based on things happening on my local computer.  I was frustrated that I needed to access the web API on the cube to code it and so this is my solution which works for my purposes and I supply here for anyone else wanting to do something similar.  *Be nice - I only dust off my Python skills about once per year!*
 
 The original AbstractFoundry code can be found here so you can compare:
 
 [Original standard_library.py](https://github.com/abstractfoundry/lumicube-daemon/blob/main/src/main/resources/META-INF/resources/python/foundry_api/standard_library.py)
 
-The main changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the lumicube deamon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the lumicube on your remote computer).
+The main changes made are simple and only prevent the default cube from being created as it is expecting to connect to a host machine with the LumiCube deamon installed which my local Mac will not have.  I have added code to throw an exception if you try to connect to the daemon if it does not exist (ie if you are trying to locally (localhost) connect to the LumiCube on your remote computer).
 
 Removing this default cube creation means that in your code you *MUST* create your own cube instance using, for example:
 
 ```cube = LumiCube("cube-hostname")```
 
-Where "cube-hostname" is the cube's IP address or hostname.  I've set the hostname for my cube to be "cube.local" and so that I can connect anywhere on my local network using the following and not needing to mess with remembering IP addresses or setting up a local DNS on my lan:
+Where "cube-hostname" is the cube's IP address or hostname.  I've set the hostname for my cube to be "cube.local" and so that I can connect anywhere on my local network using the following and not needing to mess with remembering IP addresses or setting up a local DNS on my LAN:
 
 ```cube = LumiCube("cube.local")```
 
