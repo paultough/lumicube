@@ -85,7 +85,9 @@ else:
 
 ### Additional notes
 
-This file is taken directly from the LumiCube open source repo with a few modifications so that you can run commands using the LumiCube python API on a remote computer.  This is what I bought my LumiCube for - so that I could remotely control it based on things happening on my local computer.  I was frustrated that I needed to access the web API on the cube to code it and so this is my solution which works for my purposes and I supply here for anyone else wanting to do something similar.  *Be nice - I only dust off my Python skills about once per year!*
+The standard_library.py file was taken directly from the LumiCube open source repo with a few modifications so that you can run commands using the LumiCube python API on a remote computer.  The hard work was done byt he AstractFoundry team.
+
+The changes I made were to bring to life the reason I bought my LumiCube - so that I could remotely control it based on things happening on my local computer or on the Internet.  I was frustrated that I needed to access the web API on the cube to code it and so this is my solution which works for my purposes and I supply here for anyone else wanting to do something similar.  *Be nice - I only dust off my Python skills about once per year!*
 
 The original AbstractFoundry code can be found here so you can compare:
 
@@ -116,6 +118,6 @@ Or even better:
   # my code here...
 ```
 
-For those following the examples in the cube's manual you will need to make some changes to make them work as the default cube and its aliases are not available as a result of the above changes.  See the commented out section at the end of the file if you want to replicate these or just put `cube.` in front of your calls to the cube. I prefer the prefixing as I like the non-abstracting of the fact the cube API is actually a class. It was a small peev of mine from the manual as it hid something important from the coder I think.
+For those following the examples in the cube's manual you will need to make some changes to make them work as the default cube and its aliases are not available as a result of the above changes.  See the commented out section at the end of the standard_library.py file if you want to replicate these or just put `cube.` in front of your calls to the cube. I prefer the prefixing as I like the non-abstraction of the fact the cube API is actually a class. It was a small peev of mine from the manual as it hid something important from the coder I think but I understand that for those starting out in coding this could be a good thing.
 
-
+Enjoy!
