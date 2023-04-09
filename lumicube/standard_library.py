@@ -19,21 +19,21 @@ lumicube on your remote computer).
 
 Removing this default cube creation means that in your code you *MUST* create your own cube instance using, for example:
 
-`
+```
   cube = LumiCube("cube-hostname")
-`
+```
 
 Where "cube-hostname" is the cube's IP address or hostname.  I've set the hostname for my cube to be "cube.local" and so
 I can connect anywhere on my local network using the following and not needing to mess with remembering IP addresses or setting
 up a local DNS on my lan:
 
-`
+```
   cube = LumiCube("cube.local")
-`
+```
 
 Or even better:
 
-`
+```
   cube = None
 
   if isRunningOnCube():
@@ -44,7 +44,7 @@ Or even better:
     cube = LumiCube("cube.local")
 
   # my code here...
-`
+```
 
 For those following the examples in the cube's manual you will need to make some changes to make them work as the default cube
 and its aliases are not available as a result of the above changes.  See the commented out section at the end of the file if you 
